@@ -5,12 +5,11 @@ import { JobDataPanel } from "~/lib/matador/components/job-data";
 import { JobInfoPanel } from "~/lib/matador/components/job-info";
 import { JobResultPanel } from "~/lib/matador/components/job-result";
 import { Link } from "~/lib/matador/helpers/ui-helpers";
-import type { BullJob } from "~/lib/matador/index.server";
-import { getQueueJob } from "~/lib/matador/index.server";
+import { getQueueJob, Job } from "~/lib/matador/index.server";
 
 type LoaderData = {
   queueName: string;
-  job: BullJob;
+  job: Job;
 };
 
 export const loader: LoaderFunction = async ({

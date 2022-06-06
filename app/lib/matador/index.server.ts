@@ -9,19 +9,7 @@ export type RedisInfo = {
   };
 };
 
-export type RepeatableJob = {
-  key: string;
-  name: string;
-  id: string;
-  endDate: number;
-  tz: string;
-  cron: string;
-  next: number;
-};
-
-export type BullJob = __BullJob<any, any, string>;
-
-export type Job = BullJob | RepeatableJob;
+export type Job = __BullJob<any, any, string>;
 
 export const getRedisInfo = async (redis: Redis): Promise<RedisInfo> => {
   const redisInfo: RedisInfo = {};
@@ -74,7 +62,7 @@ export const getQueues = async (redis: Redis): Promise<string[]> => {
   return queues;
 };
 
-export const getQueueJobs = async (queueName: string): Promise<BullJob[]> => {
+export const getQueueJobs = async (queueName: string): Promise<Job[]> => {
   const queue = new Queue(queueName, { connection: redis });
   return queue.getJobs();
 };
@@ -82,7 +70,7 @@ export const getQueueJobs = async (queueName: string): Promise<BullJob[]> => {
 export const getRepeatableQueueJobs = async (
   queueName: string,
   id: string
-): Promise<BullJob[]> => {
+): Promise<Job[]> => {
   const queue = new Queue(queueName, { connection: redis });
   const queueJobs = await queue.getJobs();
   return queueJobs.filter((job) => {
@@ -100,7 +88,7 @@ export const getRedisClients = async (redis: Redis): Promise<string> => {
 export const getQueueJob = async (
   queueName: string,
   jobId: string
-): Promise<BullJob | undefined> => {
+): Promise<Job | undefined> => {
   const queue = new Queue(queueName, { connection: redis });
   return queue.getJob(jobId);
 };
