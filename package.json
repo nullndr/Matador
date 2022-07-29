@@ -42,7 +42,7 @@
   ],
   "homepage": "https://github.com/nullndr/Matador#readme",
   "dependencies": {
-    "@mantine/core": "4.2.10",
+    "@mantine/core": "5.0.0",
     "@remix-run/node": "*",
     "@remix-run/react": "*",
     "@remix-run/serve": "*",
